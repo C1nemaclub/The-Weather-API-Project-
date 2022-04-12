@@ -1,14 +1,15 @@
 const fetch = require("node-fetch");
 const express = require("express");
-const app = express();
 const Datastore = require("nedb");
 require("dotenv").config();
 
+const port = process.env.PORT || 3000;
+const app = express();
 const dataBase = new Datastore("database.db");
 dataBase.loadDatabase();
 
-app.listen(3000, () => {
-  console.log("Listening at port 3000");
+app.listen(port, () => {
+  console.log(`Starting server at port ${port}`);
 });
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
